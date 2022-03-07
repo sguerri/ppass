@@ -51,7 +51,7 @@ Stores created with **ppass** are 100% compatible with **[pass](https://www.pass
 
 ### Requirements
 
-The application is developped and used on debian 10 and ubuntu 21.10. Any feedback on other platforms is welcomed.
+The application is developped and used on ubuntu 21.10, with python 3.9.7. Any feedback on other platforms is welcomed.
 
 <mark>A VOIR xdotool + wayland</mark>
 
@@ -68,29 +68,10 @@ The application is developped and used on debian 10 and ubuntu 21.10. Any feedba
 pip install ppass
 ```
 
-### Install from deb package
-
-A deb package is available, built using `dh-virtualenv`. Installing this package will create a new Python virtual environment in `opt/venvs`. It will then create the symlink `usr/bin/ppass` pointing to `opt/venvs/ppass/bin/ppass`.
-
-Download latest `.deb` file from the [release page](https://github.com/sguerri/ppass/releases).
+For an isolated environment with [pipx](https://pypa.github.io/pipx/):
 
 ```bash
-sudo dpkg -i ppass_0.1.13_amd64.deb
-```
-
-### Install from ppa
-
-The deb file is also available in my ppa.
-
-<mark>TO CONFIRM
-add-apt-repository ppa:s.noack/ppa
-???
-</mark>
-```bash
-curl -s --compressed "https://sguerri.github.io/ppa/KEY.gpg" | sudo apt-key add -
-sudo curl -s --compressed -o /etc/apt/sources.list.d/pmp.list "https://sguerri.github.io/ppa/dists/files.list"
-sudo apt update
-sudo apt install ppass
+pipx install ppass
 ```
 
 ## Usage
@@ -121,19 +102,12 @@ sudo apt install ppass
 
 **Requirements**
 
-- debhelper: `sudo apt install debhelper`
-- [dh-virtualenv](https://github.com/spotify/dh-virtualenv)
 - [build](https://github.com/pypa/build)
-- [virtualenv](https://virtualenv.pypa.io/en/latest/)
 
 **Commands**
 
 ```bash
 poetry install
-
-# build deb
-dpkg-buildpackage -us -uc
-dpkg-buildpackage -Tclean
 
 # build python package
 python3 -m build
@@ -152,7 +126,7 @@ python3 -m build
 
 ## Author
 
-Sébastien Guerri - <nierrgu@bmel.fr> - [github page](https://github.com/sguerri)
+Sébastien Guerri - [github page](https://github.com/sguerri)
 
 ## Issues
 
