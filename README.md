@@ -9,8 +9,6 @@
 
 > GPG Password Manager
 
-<mark>TODO test python 3.7 3.8 3.10</mark>
-
 **ppass** is heavily inspired from **[pass](https://www.passwordstore.org/)**
 
 I wanted to extend some of its functionnalities, and decided to rewrite the application in Python. It was a good exercice to try Python as I am more used to program in js/ts and c++/qt.
@@ -32,6 +30,8 @@ Stores created with **ppass** are 100% compatible with **[pass](https://www.pass
 **Roadmap**
 * autocompletion
 * enhanced clip functionnality
+* test on other platforms
+* produce deb files (tested with dh-virtualenv but dependent python version)
 * code cleaning
 * more to come...
 
@@ -78,7 +78,15 @@ pipx install ppass
 
 ### Initialise
 
-**ppass** creates a configuration file `.ppassrc` in the user home directory.
+Initialisation is required before using the application. 
+
+```bash
+ppass init
+```
+
+A configuration file `.ppassrc` is created in the user home directory.
+
+By default, passwords will be stored in `${HOME}/.ppass/` folder.
 
 
 
