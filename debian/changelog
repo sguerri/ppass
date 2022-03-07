@@ -1,3 +1,9 @@
+ppass (0.1.11) unstable; urgency=low
+
+  * 33c4553 Try new triggers
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 21:38:59 +0100
+
 ppass (0.1.10) unstable; urgency=low
 
   * 6e90748 Try compat 9
