@@ -15,7 +15,7 @@ I wanted to extend some of its functionnalities, and decided to rewrite the appl
 
 This beeing said, **ppass** is not as well tested or stable as **[pass](https://www.passwordstore.org/)**. I intend to make it evolve in the future, as I am using it on a daily basis. I am however alone on this one. If you want stability and portability, with a great community, please use **[pass](https://www.passwordstore.org/)**.
 
-Stores created with **ppass** are 100% compatible with **[pass](https://www.passwordstore.org/)**. They are thus also compatible with pass clients like [Android Password Store](https://github.com/android-password-store/Android-Password-Store#readme).
+Stores created with **ppass** are compatible with **[pass](https://www.passwordstore.org/)**. They are thus also compatible with pass clients like [Android Password Store](https://github.com/android-password-store/Android-Password-Store#readme).
 
 
 **Main features**
@@ -78,7 +78,7 @@ pipx install ppass
 
 ### Initialise
 
-Initialisation is required before using the application. 
+Initialisation is required before using the application, to select GPG identity.
 
 ```bash
 ppass init
@@ -88,23 +88,78 @@ A configuration file `.ppassrc` is created in the user home directory.
 
 By default, passwords will be stored in `${HOME}/.ppass/` folder.
 
+The `--edit` option will open configuration file in edit mode.
 
+### Create a folder
+
+A folder needs to be created before creating a password file.
+
+```bash
+ppass folders create
+
+# or
+
+ppass folders create --name "Name of folder"
+```
+
+### Create a new password
+
+You can then create a new password file.
+
+If you want a new password to be generated:
+
+```bash
+ppass generate
+```
+
+If you already know the password:
+
+```bash
+ppass insert
+```
+
+If the is only one folder, it will be selected by default. Otherwise the list of available folders will be prompted for selection.
+
+### Clip username and password
+
+`ppass open` will open a new webbrowser with the saved url
+
+`ppass clip` will copy and paste to the active window the username as well as the password : `{username} {TAB} {password} {RETURN}`
+
+`ppass user` will copy username to clipboard
+
+`ppass pass` will copy password to clipboard
+
+In case a password is saved with your GPG identity, it will be prompted through a modal window.
+
+### Filter
+
+<mark>TODO with enhanced filter</mark>
+
+### Add a new store
+
+You can create several stores (config sections).
+
+```bash
+ppass init --new-section
+```
+
+<mark>NE MARCHE PAS</mark>
+
+ppass -c "PERSO" init --new-section --path "/home/sebastien/.ppass-perso"
 
 ### Initialise from git
 
 ### Publish to git
 
-### Add a new config section
 
-### Manage folders
 
-### Manage password files
-
-### Create a new password
-
-### Clip username and password
 
 ### Change output to JSON
+
+### Shortcuts and Aliases
+
+
 
 ## Build
 
