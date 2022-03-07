@@ -9,6 +9,8 @@
 
 > GPG Password Manager
 
+<mark>TODO test python 3.7 3.8 3.10</mark>
+
 **ppass** is heavily inspired from **[pass](https://www.passwordstore.org/)**
 
 I wanted to extend some of its functionnalities, and decided to rewrite the application in Python. It was a good exercice to try Python as I am more used to program in js/ts and c++/qt.
@@ -88,7 +90,7 @@ add-apt-repository ppa:s.noack/ppa
 curl -s --compressed "https://sguerri.github.io/ppa/KEY.gpg" | sudo apt-key add -
 sudo curl -s --compressed -o /etc/apt/sources.list.d/pmp.list "https://sguerri.github.io/ppa/dists/files.list"
 sudo apt update
-sudo apt install pmppmp
+sudo apt install ppass
 ```
 
 ## Usage
