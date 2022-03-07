@@ -1,8 +1,9 @@
 name: Build
 
-on:
-  push:
-    branches: [ "main" ]
+on: [push]
+
+env:
+  BUILD_TYPE: Release
 
 jobs:
   build:
