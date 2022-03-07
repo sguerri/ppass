@@ -12,7 +12,7 @@ jobs:
 
     env:
       APP_NAME: ppass
-      APP_VERSION: "0.1.7"
+      APP_VERSION: "0.1.8"
       PPA_REPO: sguerri/ppa
       PPA_USER: Sébastien GUERRI
       PPA_EMAIL: 13090870+sguerri@users.noreply.github.com
@@ -24,7 +24,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v3.0.0
         with:
-          python-version: 3.9
+          python-version: '3.9'
 
       - name: Install dependencies
         run: |

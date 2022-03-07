@@ -1,3 +1,10 @@
+ppass (0.1.8) unstable; urgency=low
+
+  * f168cbc Update debian triggers
+  * e50a6cc Update debian control file
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 20:51:46 +0100
+
 ppass (0.1.7) unstable; urgency=low
 
   * 4ed17aa Update debian triggers
