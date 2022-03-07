@@ -1,8 +1,9 @@
 name: Build
 
-on:
-  push:
-    branches: [ "main" ]
+on: [push]
+
+env:
+  BUILD_TYPE: Release
 
 jobs:
   build:
@@ -11,7 +12,7 @@ jobs:
 
     env:
       APP_NAME: ppass
-      APP_VERSION: "0.1.0"
+      APP_VERSION: "0.1.1"
       PPA_REPO: sguerri/ppa
       PPA_USER: Sébastien GUERRI
       PPA_EMAIL: 13090870+sguerri@users.noreply.github.com
