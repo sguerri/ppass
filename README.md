@@ -73,7 +73,7 @@ A deb package is available, built using `dh-virtualenv`. Installing this package
 Download latest `.deb` file from the [release page](https://github.com/sguerri/ppass/releases).
 
 ```bash
-sudo dpkg -i ppass_0.1.1_amd64.deb
+sudo dpkg -i ppass_0.1.2_amd64.deb
 ```
 
 ### Install from ppa
