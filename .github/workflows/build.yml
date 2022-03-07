@@ -12,7 +12,7 @@ jobs:
 
     env:
       APP_NAME: ppass
-      APP_VERSION: "0.1.13"
+      APP_VERSION: "0.2.0"
       PPA_REPO: sguerri/ppa
       PPA_USER: Sébastien GUERRI
       PPA_EMAIL: 13090870+sguerri@users.noreply.github.com
@@ -26,27 +26,13 @@ jobs:
 #        with:
 #          python-version: '3.9'
 
-      - name: Install dependencies
-        run: |
-          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv &&
-          sudo apt update &&
-          sudo apt install -y debhelper dh-virtualenv
-
       - name: Install python dependencies
         run: |
-          pip install virtualenv build
-
-      - name: Build deb
-        run: |
-          dpkg-buildpackage -us -uc
+          pip install build
 
       - name: Build python
         run: |
           python3 -m build
-
-      - name: Copy build items
-        run: |
-          mv ../${{env.APP_NAME}}_${{env.APP_VERSION}}_amd64.deb ./dist/
 
       - name: Release
         uses: fnkr/github-action-ghr@v1
