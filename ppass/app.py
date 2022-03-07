@@ -79,7 +79,7 @@ def load_config(is_json: bool, section: str, new_section: bool = False) -> Confi
     Returns:
         Config: config object
     """
-    config_file = app.default.rcpath()
+    config_file = app.default_rcpath()
     if not os.path.exists(config_file):
         config = create_config_file(config_file)
     else:
@@ -217,7 +217,7 @@ def get_content(config: Config, password: str, user: str, url: str, comment: str
 @click.option("-y", "--yes", is_flag=True, help="Auto confirm all prompts")
 @click.option("--json", is_flag=True, help="Return json values instead of ui")
 def cli(ctx, context, yes, json):
-    """Base cli command
+    """GPG Password Manager
     """
     ctx.obj["context"] = context
     ctx.obj["is_yes"] = yes
@@ -240,7 +240,7 @@ def cli_init(ctx, new_section, path, identity, edit):
     try:
         if edit:
             assert (not is_json), "Edit action not available in JSON mode"
-            click.edit(filename=app.default.rcpath())
+            click.edit(filename=app.default_rcpath())
         else:
             config = load_config(is_json, context, new_section)
             if path == app.default_path():
