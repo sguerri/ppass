@@ -1,3 +1,9 @@
+ppass (0.1.1) unstable; urgency=low
+
+  * 8cbb63e Update github action
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 10:50:50 +0100
+
 ppass (0.1.0) unstable; urgency=low
 
   * af11e88 Initial commit
