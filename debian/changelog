@@ -1,3 +1,9 @@
+ppass (0.1.5) unstable; urgency=low
+
+  * b0783ad Update debian triggers
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 17:53:22 +0100
+
 ppass (0.1.4) unstable; urgency=low
 
   * 5135818 Update debian triggers
