@@ -10,7 +10,7 @@ Package: ppass
 Architecture: any
 Section: utils
 Priority: optional
-Pre-Depends: dpkg (>= 1.16.1), python3 (>= 3.7,<4.0)
+Pre-Depends: dpkg (>= 1.16.1), python3 (>= 3.7)
 Depends: xdotool, git, gpg, nano, xclip
 Description: GPG Password Manager
 Homepage: https://github.com/sguerri/ppass
