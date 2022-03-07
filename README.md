@@ -93,9 +93,11 @@ sudo apt install pmppmp
 
 ## Usage
 
-Go to [https://sguerri.github.io/p5ball/index.html](https://sguerri.github.io/p5ball/index.html)
-
 ### Initialise
+
+**ppass** creates a configuration file `.ppassrc` in the user home directory.
+
+
 
 ### Initialise from git
 
