@@ -1,3 +1,11 @@
+ppass (0.2.7) unstable; urgency=low
+
+  * db9c856 Fix small bugs
+  * 2412342 Update readme
+  * fa781cb Add pypi publication
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Tue, 08 Mar 2022 22:06:29 +0100
+
 ppass (0.2.6) unstable; urgency=low
 
   * 582f521 Update github workflow

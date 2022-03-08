@@ -1,7 +1,7 @@
 # Welcome to ppass
 
 [![](https://badgen.net/github/release/sguerri/ppass)](https://github.com/sguerri/ppass/releases/)
-[![](https://img.shields.io/github/workflow/status/sguerri/ppass/Build/v0.2.6)](https://github.com/sguerri/ppass/actions/workflows/build.yml)
+[![](https://img.shields.io/github/workflow/status/sguerri/ppass/Build/v0.2.7)](https://github.com/sguerri/ppass/actions/workflows/build.yml)
 [![](https://badgen.net/github/license/sguerri/ppass)](https://www.gnu.org/licenses/)
 [![](https://badgen.net/pypi/v/ppass)](https://pypi.org/project/ppass/)
 ![](https://badgen.net/pypi/python/ppass)
@@ -26,12 +26,13 @@ Stores created with **ppass** are compatible with **[pass](https://www.passwords
 * open web browser from password file
 * automatic fill in username and password to web browser
 * cli user interface or json response
+* cli commands shortcuts for fast access to passwords
 
 **Roadmap**
+* enhanced filter
 * autocompletion
 * enhanced clip functionnality
 * test on other platforms
-* produce deb files (tested with dh-virtualenv but dependent python version)
 * code cleaning
 * more to come...
 
@@ -39,8 +40,22 @@ Stores created with **ppass** are compatible with **[pass](https://www.passwords
 
 - [Welcome to ppass](#welcome-to-ppass)
   * [Installation](#installation)
+    + [Requirements](#requirements)
+    + [Install from pypi](#install-from-pypi)
+    + [Install from deb package](#install-from-deb-package)
   * [Usage](#usage)
-    + [fdsfds](#fdsfds)
+    + [Initialise](#initialise)
+    + [Create a folder](#create-a-folder)
+    + [Create a new password](#create-a-new-password)
+    + [Clip username and password](#clip-username-and-password)
+    + [Filter](#filter)
+    + [Add a new store](#add-a-new-store)
+    + [Use a store](#use-a-store)
+    + [Initialise new git repository](#initialise-new-git-repository)
+    + [Initialise from existing git repository](#initialise-from-existing-git-repository)
+    + [Publish to git](#publish-to-git)
+    + [Change output to JSON](#change-output-to-json)
+    + [Shortcuts and Aliases](#shortcuts-and-aliases)
   * [Build](#build)
   * [Dependencies](#dependencies)
   * [Author](#author)
@@ -53,9 +68,7 @@ Stores created with **ppass** are compatible with **[pass](https://www.passwords
 
 The application is developped and used on ubuntu 21.10, with python 3.9.7. Any feedback on other platforms is welcomed.
 
-<mark>A VOIR xdotool + wayland</mark>
-
-- python3 >=3.7,<4.0
+- python3 >=3.6.2,<4.0
 - xdotool: `sudo apt install xdotool`
 - git: `sudo apt install git`
 - gpg: `sudo apt install gnupg`
@@ -72,6 +85,22 @@ For an isolated environment with [pipx](https://pypa.github.io/pipx/):
 
 ```bash
 pipx install ppass
+```
+
+### Install from deb package
+
+A deb package is available, built using `dh-virtualenv`. Installing this package will create a new Python virtual environment in `opt/venvs`. It will then create the symlink `usr/bin/ppass` pointing to `opt/venvs/ppass/bin/ppass`.
+
+Note that `dh-virtualenv` built packages are dependent of python version. Use this only if you have default python version installed:
+* ubuntu bionic 18.04: Python 3.6
+* ubuntu focal 20.04: Python 3.8
+* ubuntu hirsute 21.04: Python 3.9
+* ubuntu impish 21.10: Python 3.9
+
+Download latest `.deb` file from the [release page](https://github.com/sguerri/ppass/releases).
+
+```bash
+sudo dpkg -i ppass_0.2.7_{{os}}_amd64.deb
 ```
 
 ## Usage
@@ -99,7 +128,7 @@ ppass folders create
 
 # or
 
-ppass folders create --name "Name of folder"
+ppass folders create --name "${NAME}"
 ```
 
 ### Create a new password
@@ -134,43 +163,124 @@ In case a password is saved with your GPG identity, it will be prompted through 
 
 ### Filter
 
-<mark>TODO with enhanced filter</mark>
+Currently password filter is only done on the password name, not on the folder name.
+
+A future enhancement will provide a better filter functionnality.
+
+`ppass <command> <anything>` will filter displayed passwords based on `anything` value (name containing this value).
 
 ### Add a new store
 
-You can create several stores (config sections).
+You can create several stores (config sections). Default store path is `${HOME}/.ppass-${NAME}/`
 
 ```bash
-ppass init --new-section
+ppass -c "${STORE}" init --new-section
 ```
 
-<mark>NE MARCHE PAS</mark>
+You can also select path via the option `--path`. The folder will be created if it does not exist.
 
-ppass -c "PERSO" init --new-section --path "/home/sebastien/.ppass-perso"
+```bash
+ppass -c "${STORE}" init --new-section --path "${PATH}"
+```
 
-### Initialise from git
+### Use a store
+
+All functions can be used for a specific store by using the `-c` option from **ppass** application.
+
+```bash
+ppass -c "${STORE}" generate ...
+ppass -c "${STORE}" insert ...
+ppass -c "${STORE}" open ...
+ppass -c "${STORE}" clip ...
+# etc.
+```
+
+### Initialise new git repository
+
+You can initialise a new git repository in store path. It will set automatic git push for every password creation or modification. The git repository needs to be created on your platform before.
+
+A default branch `main` is created.
+
+```bash
+ppass -c "${STORE}" init-git
+```
+
+You can also pass parameter through cli command:
+
+```bash
+ppass -c "${STORE}" init-git --repo "${REPO}" --user "${USER}" --mail "${EMAIL}"
+```
+
+### Initialise from existing git repository
+
+If the git repository already exists, you can restore it in the current store folder by adding the `--pull` option to `init-git` command.
+
+It will download the latest commit from `main` branch. If the branch name is different, you can update it in the config file through `ppass init --edit`.
 
 ### Publish to git
 
+When a git repository is enabled, all changes to passwords will be pushed to remote. However, there will never be automatic pull to retrieve potential password changes from remote (from other application, computer, user, android app, aso.).
 
+Automatic pull is not activated so that access to password remain fast.
 
+It can be done manually through
+
+```bash
+ppass -c "${STORE} git pull"
+  # or
+ppass -c "${STORE} git sync" # pull then push
+```
+
+In case a remote change is done but not pulled, the automatic push on password modification will fail. A manual `git sync` will be required to merge local and remote.
 
 ### Change output to JSON
 
+Default application prints in the cli items in a user friendly way: tables, prompts, aso.
+
+It is however possible to pass all required parameters through command options, and retrieve function results in JSON format.
+
+```bash
+ppass --json <command> ...
+```
+
 ### Shortcuts and Aliases
 
+Application must give a fast access to passwords to be useful.
 
+All commands can be called by shortcuts with their first letter(s):
+* `g` for `generate`
+* `c` for `clip`
+* `o` for `open`
+* ...
+
+I personnaly also defined shortcuts in my home `.bashrc` file:
+
+```bash
+alias pp='ppass -c PRO'
+alias ppc='ppass -c PRO clip'
+alias ppo='ppass -c PRO open'
+alias ppp='ppass -c PERSO'
+alias pppc='ppass -c PERSO clip'
+alias pppo='ppass -c PERSO open'
+```
 
 ## Build
 
 **Requirements**
 
+- debhelper: `sudo apt install debhelper`
+- [dh-virtualenv](https://github.com/spotify/dh-virtualenv)
 - [build](https://github.com/pypa/build)
+- [virtualenv](https://virtualenv.pypa.io/en/latest/)
 
 **Commands**
 
 ```bash
 poetry install
+
+# build deb
+dpkg-buildpackage -us -uc
+dpkg-buildpackage -Tclean
 
 # build python package
 python3 -m build
