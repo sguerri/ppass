@@ -22,21 +22,21 @@ jobs:
     container: ${{ matrix.config.container }}
     strategy:
       fail-fast: true
-      max-parallel: 4
+      max-parallel: 1
       matrix:
         config:
-          - name: bionic
-            os: ubuntu-20.04
-            container: ubuntu:18.04
-            triplet: x64-linux
-          - name: focal
-            os: ubuntu-20.04
-            container: ubuntu:20.04
-            triplet: x64-linux
-          - name: hirsute
-            os: ubuntu-20.04
-            container: ubuntu:21.04
-            triplet: x64-linux
+#          - name: bionic
+#            os: ubuntu-20.04
+#            container: ubuntu:18.04
+#            triplet: x64-linux
+#          - name: focal
+#            os: ubuntu-20.04
+#            container: ubuntu:20.04
+#            triplet: x64-linux
+#          - name: hirsute
+#            os: ubuntu-20.04
+#            container: ubuntu:21.04
+#            triplet: x64-linux
           - name: impish
             os: ubuntu-20.04
             container: ubuntu:21.10
@@ -85,7 +85,8 @@ jobs:
           mkdir dist && \
           mv ../${{env.APP_NAME}}_${{env.APP_VERSION}}_amd64.deb ./dist/${{env.APP_NAME}}_${{env.APP_VERSION}}_${{ matrix.config.name }}_amd64.deb
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         with:
           name: ${{env.APP_NAME}}_${{env.APP_VERSION}}_${{ matrix.config.name }}_amd64.deb
           path: ./dist/${{env.APP_NAME}}_${{env.APP_VERSION}}_${{ matrix.config.name }}_amd64.deb
@@ -106,10 +107,28 @@ jobs:
         run: |
           python3 -m build
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         with:
           name: wheel
           path: dist/
+
+  publish:
+    runs-on: ubuntu-20.04
+    needs: [ 'build-deb', 'build-python' ]
+
+    steps:
+      - name: Checkout current version
+        uses: actions/checkout@v2
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+          with:
+            path: artifacts
+    
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: artifacts
 
 #      - name: Release
 #        uses: fnkr/github-action-ghr@v1
