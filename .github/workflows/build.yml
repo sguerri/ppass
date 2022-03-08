@@ -74,7 +74,7 @@ jobs:
 
       - name: Install python dependencies
         run: |
-          pip install virtualenv build
+          python3 -m pip install virtualenv build
 
       - name: Build deb
         run: |
