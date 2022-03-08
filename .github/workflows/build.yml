@@ -17,7 +17,7 @@ jobs:
     #container: ${{ matrix.config.container }}
     strategy:
       fail-fast: true
-      max-parallel: 1
+      max-parallel: 3
       matrix:
         config:
           #- name: bionic
@@ -73,11 +73,11 @@ jobs:
 
       - name: Copy build items
         run: |
-          mv ../${{env.APP_NAME}}_${{env.APP_VERSION}}_amd64.deb ./dist/
+          mv ../${{env.APP_NAME}}_${{env.APP_VERSION}}_amd64.deb ./dist/${{env.APP_NAME}}_${{env.APP_VERSION}}_${{ matrix.config.name }}_amd64.deb
 
       - uses: actions/upload-artifact@v3
         with:
-          name: build-items
+          name: build-items-${{ matrix.config.name }}
           path: dist/
 
 #      - name: Release
