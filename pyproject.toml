@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "ppass"
-version = "0.2.1"
+version = "0.2.2"
 description = "GPG Password Manager"
 authors = ["Sebastien GUERRI <nierrgu@bmel.fr>"]
 license = "GPL-3.0"
@@ -17,7 +17,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.7,<4.0"
+python = ">=3.6.2,<4.0"
 click = "^8.0.4"
 rich = "^11.2.0"
 pyclip = "^0.5.4"

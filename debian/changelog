@@ -1,0 +1,93 @@
+ppass (0.2.2) unstable; urgency=low
+
+  * beb646d Update readme
+  * e7725a4 Update debian build
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Tue, 08 Mar 2022 18:06:17 +0100
+
+ppass (0.1.13) unstable; urgency=low
+
+  * 47f2ece Try new build values
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 22:14:05 +0100
+
+ppass (0.1.12) unstable; urgency=low
+
+  * fa51ac3 Test new rule
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 22:07:10 +0100
+
+ppass (0.1.11) unstable; urgency=low
+
+  * 33c4553 Try new triggers
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 21:38:59 +0100
+
+ppass (0.1.10) unstable; urgency=low
+
+  * 6e90748 Try compat 9
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 21:32:20 +0100
+
+ppass (0.1.9) unstable; urgency=low
+
+  * a222266 Update debian rules
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 20:57:16 +0100
+
+ppass (0.1.8) unstable; urgency=low
+
+  * f168cbc Update debian triggers
+  * e50a6cc Update debian control file
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 20:51:46 +0100
+
+ppass (0.1.7) unstable; urgency=low
+
+  * 4ed17aa Update debian triggers
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 18:06:17 +0100
+
+ppass (0.1.6) unstable; urgency=low
+
+  * b74b72d Update debian triggers
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 17:59:37 +0100
+
+ppass (0.1.5) unstable; urgency=low
+
+  * b0783ad Update debian triggers
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 17:53:22 +0100
+
+ppass (0.1.4) unstable; urgency=low
+
+  * 5135818 Update debian triggers
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 17:44:19 +0100
+
+ppass (0.1.3) unstable; urgency=low
+
+  * 6af43c6 Update debian info
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 13:19:04 +0100
+
+ppass (0.1.2) unstable; urgency=low
+
+  * d11bdbf Update debian pmp.links
+  * 9dd0dca Update readme
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 12:11:59 +0100
+
+ppass (0.1.1) unstable; urgency=low
+
+  * 8cbb63e Update github action
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 10:50:50 +0100
+
+ppass (0.1.0) unstable; urgency=low
+
+  * af11e88 Initial commit
+  * 482f50c Initial commit
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Mon, 07 Mar 2022 10:47:16 +0100
