@@ -14,27 +14,27 @@ jobs:
 
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
-    #container: ${{ matrix.config.container }}
+    container: ${{ matrix.config.container }}
     strategy:
       fail-fast: true
       max-parallel: 3
       matrix:
         config:
-          #- name: bionic
-          #  os: ubuntu-18.04
-          #  container: ubuntu:18.04
-          #  triplet: x64-linux
+          - name: bionic
+            os: ubuntu-20.04
+            container: ubuntu:18.04
+            triplet: x64-linux
           - name: focal
             os: ubuntu-20.04
-            #container: ubuntu:20.04
+            container: ubuntu:20.04
             triplet: x64-linux
           - name: hirsute
-            os: ubuntu-21.04
-            #container: ubuntu:21.04
+            os: ubuntu-20.04
+            container: ubuntu:21.04
             triplet: x64-linux
           - name: impish
-            os: ubuntu-21.10
-            #container: ubuntu:21.10
+            os: ubuntu-20.04
+            container: ubuntu:21.10
             triplet: x64-linux
 
     env:
