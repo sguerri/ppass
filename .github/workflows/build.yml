@@ -7,7 +7,7 @@ on:
 
 env:
   APP_NAME: ppass
-  APP_VERSION: "0.2.5"
+  APP_VERSION: "0.2.6"
   PPA_REPO: sguerri/ppa
   PPA_USER: Sébastien GUERRI
   PPA_EMAIL: 13090870+sguerri@users.noreply.github.com
@@ -146,8 +146,8 @@ jobs:
         uses: fnkr/github-action-ghr@v1
         env:
           GHR_PATH: artifacts/dist/
-          GHR_DELETE: true
-          GHR_REPLACE: true
+#          GHR_DELETE: true
+#          GHR_REPLACE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
