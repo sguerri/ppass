@@ -20,10 +20,10 @@ jobs:
       max-parallel: 1
       matrix:
         config:
-          - name: bionic
-            os: ubuntu-18.04
-            container: ubuntu:18.04
-            triplet: x64-linux
+          #- name: bionic
+          #  os: ubuntu-18.04
+          #  container: ubuntu:18.04
+          #  triplet: x64-linux
           - name: focal
             os: ubuntu-20.04
             container: ubuntu:20.04
@@ -55,9 +55,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv &&
-          apt update &&
-          apt install -y debhelper dh-virtualenv
+          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv &&
+          sudo apt update &&
+          sudo apt install -y debhelper dh-virtualenv
 
       - name: Install python dependencies
         run: |
