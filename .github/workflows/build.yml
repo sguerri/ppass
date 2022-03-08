@@ -92,6 +92,8 @@ jobs:
 #          name: build-items-${{ matrix.config.name }}
 
   build-python:
+    runs-on: ubuntu-20.04
+
     steps:
       - name: Checkout current version
         uses: actions/checkout@v2
