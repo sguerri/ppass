@@ -71,6 +71,15 @@ jobs:
 #          python-version: '3.9'
 
       - name: Install dependencies
+        if: matrix.config.name == 'focal'
+        run: |
+          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv && \
+          sudo apt update && \
+          sudo apt install -y debhelper devscripts equivs dh-virtualenv
+
+
+      - name: Install dependencies
+        if: matrix.config.name != 'focal'
         run: |
           sudo apt install -y debhelper devscripts equivs dh-virtualenv
 #          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv &&
