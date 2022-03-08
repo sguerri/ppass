@@ -132,8 +132,8 @@ jobs:
 
       - name: Move all files
         run: |
-          mkdir dist && \
-          find . -mindepth 2 -type f -print -exec mv {} . \;
+          mkdir ./dist && \
+          find . -mindepth 2 -type f -print -exec mv {} ./dist \;
         working-directory: artifacts
 
       - name: Display structure of dist
