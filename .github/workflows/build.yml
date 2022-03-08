@@ -1,13 +1,16 @@
 name: Build
 
-on: [push]
+on:
+  push:
+    branches:
+      - "test-debian"
 
 env:
   BUILD_TYPE: Release
 
 jobs:
   build:
-    if: startsWith(github.ref, 'refs/tags/')
+    #if: startsWith(github.ref, 'refs/tags/')
 
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
