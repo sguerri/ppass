@@ -4,7 +4,7 @@
 [![](https://img.shields.io/github/workflow/status/sguerri/ppass/Build/v0.2.7)](https://github.com/sguerri/ppass/actions/workflows/build.yml)
 [![](https://badgen.net/github/license/sguerri/ppass)](https://www.gnu.org/licenses/)
 [![](https://badgen.net/pypi/v/ppass)](https://pypi.org/project/ppass/)
-![](https://badgen.net/pypi/python/ppass)
+[![](https://badgen.net/pypi/python/ppass)](#)
 [![](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](#)
 
 > GPG Password Manager
