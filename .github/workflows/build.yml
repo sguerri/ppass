@@ -52,7 +52,8 @@ jobs:
           apt-get install -y sudo ca-certificates unzip gnupg curl git && \
           apt-get install -y software-properties-common &&
           DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && \
-          apt-get install -y build-essential
+          apt-get install -y build-essential && \
+          python -m ensurepip --upgrade
 
       - name: Checkout current version
         uses: actions/checkout@v2
