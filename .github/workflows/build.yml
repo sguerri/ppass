@@ -36,6 +36,10 @@ jobs:
             os: ubuntu-20.04
             container: ubuntu:21.10
             triplet: x64-linux
+          - name: jammy
+            os: ubuntu-20.04
+            container: ubuntu:22.04
+            triplet: x64-linux
 
     env:
       APP_NAME: ppass
@@ -68,9 +72,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv &&
-          sudo apt update &&
           sudo apt install -y debhelper devscripts equivs dh-virtualenv
+#          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv &&
+#          sudo apt update &&
 
       - name: Install python dependencies
         run: |
