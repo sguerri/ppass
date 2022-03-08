@@ -3,7 +3,6 @@ name: Build
 on:
   push:
     tags: ['v[0-9].[0-9]+.[0-9]+']
-#    branches: [main]
 
 env:
   APP_NAME: ppass
@@ -15,7 +14,6 @@ env:
 
 jobs:
   build-deb:
-#    if: startsWith(github.ref, 'refs/tags/')
 
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
@@ -76,10 +74,6 @@ jobs:
         run: |
           dpkg-buildpackage -us -uc
 
-#      - name: Build python
-#        run: |
-#          python3 -m build
-
       - name: Copy build items
         run: |
           mkdir dist && \
@@ -90,10 +84,10 @@ jobs:
         with:
           name: deb-${{ matrix.config.name }}
           path: ./dist/${{env.APP_NAME}}_${{env.APP_VERSION}}_${{ matrix.config.name }}_amd64.deb
-#          name: build-items-${{ matrix.config.name }}
+
+# TODO add publish to PPA
 
   build-python:
-#    if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-20.04
 
     steps:
@@ -114,8 +108,13 @@ jobs:
           name: wheel
           path: dist/
 
-  publish:
-#    if: startsWith(github.ref, 'refs/tags/')
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
+
+  release:
     runs-on: ubuntu-20.04
     needs: [ 'build-deb', 'build-python' ]
 
@@ -127,10 +126,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: artifacts
-    
-#      - name: Display structure of downloaded files
-#        run: ls -R
-#        working-directory: artifacts
 
       - name: Move all files
         run: |
@@ -138,19 +133,13 @@ jobs:
           find . -mindepth 2 -type f -print -exec mv {} ./dist \;
         working-directory: artifacts
 
-#      - name: Display structure of dist
-#        run: ls -R
-#        working-directory: artifacts/dist
-
       - name: Release
         uses: fnkr/github-action-ghr@v1
         env:
           GHR_PATH: artifacts/dist/
-#          GHR_DELETE: true
-#          GHR_REPLACE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
+# TODO remove all artifacts
 
 
 #  cleanup_job:
