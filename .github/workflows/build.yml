@@ -6,10 +6,15 @@ on:
       - "test-debian"
 
 env:
+  APP_NAME: ppass
+  APP_VERSION: "0.1.13"
+  PPA_REPO: sguerri/ppa
+  PPA_USER: Sébastien GUERRI
+  PPA_EMAIL: 13090870+sguerri@users.noreply.github.com
   BUILD_TYPE: Release
 
 jobs:
-  build:
+  build-deb:
     #if: startsWith(github.ref, 'refs/tags/')
 
     name: ${{ matrix.config.name }}
@@ -36,17 +41,6 @@ jobs:
             os: ubuntu-20.04
             container: ubuntu:21.10
             triplet: x64-linux
-          - name: jammy
-            os: ubuntu-20.04
-            container: ubuntu:22.04
-            triplet: x64-linux
-
-    env:
-      APP_NAME: ppass
-      APP_VERSION: "0.1.13"
-      PPA_REPO: sguerri/ppa
-      PPA_USER: Sébastien GUERRI
-      PPA_EMAIL: 13090870+sguerri@users.noreply.github.com
 
     steps:
       - name: Setup container
@@ -58,52 +52,61 @@ jobs:
           apt-get install -y software-properties-common && \
           apt-get install -y build-essential && \
           apt-get install -y python3 python3-venv python3-pip
-# && \
-#curl -o get-pip.py https://bootstrap.pypa.io/get-pip.py && \
-#python3 get-pip.py
 
       - name: Checkout current version
         uses: actions/checkout@v2
 
-#      - name: Setup Python
-#        uses: actions/setup-python@v3.0.0
-#        with:
-#          python-version: '3.9'
-
-      - name: Install dependencies
+      - name: Install dependencies (focal)
         if: matrix.config.name == 'focal'
         run: |
           sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv && \
           sudo apt update && \
           sudo apt install -y debhelper devscripts equivs dh-virtualenv
 
-
-      - name: Install dependencies
+      - name: Install dependencies (others)
         if: matrix.config.name != 'focal'
         run: |
           sudo apt install -y debhelper devscripts equivs dh-virtualenv
-#          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv &&
-#          sudo apt update &&
 
-      - name: Install python dependencies
-        run: |
-          python3 -m pip install virtualenv build
+#      - name: Install python dependencies
+#        run: |
+#          python3 -m pip install virtualenv build
 
       - name: Build deb
         run: |
           dpkg-buildpackage -us -uc
 
-      - name: Build python
-        run: |
-          python3 -m build
+#      - name: Build python
+#        run: |
+#          python3 -m build
 
       - name: Copy build items
         run: |
+          mkdir dist && \
           mv ../${{env.APP_NAME}}_${{env.APP_VERSION}}_amd64.deb ./dist/${{env.APP_NAME}}_${{env.APP_VERSION}}_${{ matrix.config.name }}_amd64.deb
 
       - uses: actions/upload-artifact@v3
         with:
-          name: build-items-${{ matrix.config.name }}
+          name: ${{env.APP_NAME}}_${{env.APP_VERSION}}_${{ matrix.config.name }}_amd64.deb
+          path: ./dist/${{env.APP_NAME}}_${{env.APP_VERSION}}_${{ matrix.config.name }}_amd64.deb
+#          name: build-items-${{ matrix.config.name }}
+
+  build-python:
+    steps:
+      - name: Checkout current version
+        uses: actions/checkout@v2
+
+      - name: Install python dependencies
+        run: |
+          python3 -m pip install virtualenv build
+
+      - name: Build python
+        run: |
+          python3 -m build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: wheel
           path: dist/
 
 #      - name: Release
