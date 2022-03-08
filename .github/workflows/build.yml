@@ -146,8 +146,8 @@ jobs:
         uses: fnkr/github-action-ghr@v1
         env:
           GHR_PATH: artifacts/dist/
-          GHR_DELETE: true
-          GHR_REPLACE: true
+#          GHR_DELETE: true
+#          GHR_REPLACE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
