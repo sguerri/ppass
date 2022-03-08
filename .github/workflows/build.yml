@@ -130,6 +130,16 @@ jobs:
         run: ls -R
         working-directory: artifacts
 
+      - name: Move all files
+        run: |
+          mkdir dist && \
+          cp "artifacts/**/*" dist
+
+      - name: Display structure of dist
+        run: ls -R
+        working-directory: dist
+
+
 #      - name: Release
 #        uses: fnkr/github-action-ghr@v1
 #        env:
