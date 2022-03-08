@@ -1,3 +1,9 @@
+ppass (0.2.5) unstable; urgency=low
+
+  * 30f0c94 Update github workflow
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Tue, 08 Mar 2022 19:17:19 +0100
+
 ppass (0.2.4) unstable; urgency=low
 
   * e48348b Update github workflow

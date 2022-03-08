@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "ppass"
-version = "0.2.4"
+version = "0.2.5"
 description = "GPG Password Manager"
 authors = ["Sebastien GUERRI <nierrgu@bmel.fr>"]
 license = "GPL-3.0"
