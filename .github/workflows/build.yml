@@ -56,10 +56,6 @@ jobs:
       - name: Checkout current version
         uses: actions/checkout@v2
 
-      - name: Install python dependencies
-        run: |
-          python3 -m pip install virtualenv build
-
       - name: Install dependencies (focal)
         if: matrix.config.name == 'focal'
         run: |
@@ -72,9 +68,9 @@ jobs:
         run: |
           sudo apt install -y debhelper devscripts equivs dh-virtualenv
 
-#      - name: Install python dependencies
-#        run: |
-#          python3 -m pip install virtualenv build
+      - name: Install python dependencies
+        run: |
+          python3 -m pip install virtualenv build
 
       - name: Build deb
         run: |
