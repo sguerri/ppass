@@ -55,9 +55,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv &&
-          sudo apt update &&
-          sudo apt install -y debhelper dh-virtualenv
+          add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv &&
+          apt update &&
+          apt install -y debhelper dh-virtualenv
 
       - name: Install python dependencies
         run: |
