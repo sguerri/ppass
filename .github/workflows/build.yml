@@ -56,6 +56,10 @@ jobs:
       - name: Checkout current version
         uses: actions/checkout@v2
 
+      - name: Install python dependencies
+        run: |
+          python3 -m pip install virtualenv
+
       - name: Install dependencies (focal)
         if: matrix.config.name == 'focal'
         run: |
@@ -100,7 +104,7 @@ jobs:
 
       - name: Install python dependencies
         run: |
-          python3 -m pip install virtualenv build
+          python3 -m pip install build
 
       - name: Build python
         run: |
