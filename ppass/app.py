@@ -233,7 +233,7 @@ def cli(ctx, context, yes, json):
 @click.option("--path", default=app.default_path(), help="Path where the files are stored")
 @click.option("--identity", default="", help="Identity")
 @click.option("--edit", is_flag=True, help="Edit configuration file")
-def cli_init(ctx, new_section, path, identity, edit):
+def cli_init(ctx, new_section: bool, path: str, identity: str, edit: bool):
     """Initialize the application for the current context
     """
     (context, is_json, is_yes) = recup_context(ctx)
@@ -243,7 +243,9 @@ def cli_init(ctx, new_section, path, identity, edit):
             click.edit(filename=app.default_rcpath())
         else:
             config = load_config(is_json, context, new_section)
-            if path == app.default_path():
+            if path == app.default_path() and new_section:
+                path = path[:len(path)-1] + "-" + context.lower()
+            if not os.path.exists(path):
                 os.makedirs(path)
             config.path = params.validate_path(is_json, path, "Path")
             config.identity = params.validate_identity(is_json, identity)
@@ -685,5 +687,63 @@ def cli_folders_delete(ctx: click.Context, name: str):
         if config.usegit:
             git.push(config.path, f"Folder <{name}> has been deleted", config.gitbranch)
         handle_success(is_json, f"Folder <{name}> has been deleted")
+    except Exception as error:
+        handle_error(is_json, error)
+
+
+# GIT #################################################################################################################
+
+@cli.group("git", cls=AliasedGroup)
+@click.pass_context
+def cli_git(ctx: click.Context):
+    """Git commands
+    """
+    pass
+
+
+@cli_git.command("status")
+@click.pass_context
+def cli_git_status(ctx: click.Context):
+    """Git status
+    """
+    (config, is_json, is_yes) = init_command(ctx)
+    try:
+        git.status(config.path)
+    except Exception as error:
+        handle_error(is_json, error)
+
+
+@cli_git.command("pull")
+@click.pass_context
+def cli_git_pull(ctx: click.Context):
+    """Git pull
+    """
+    (config, is_json, is_yes) = init_command(ctx)
+    try:
+        git.pull(config.path, config.gitbranch)
+    except Exception as error:
+        handle_error(is_json, error)
+
+
+@cli_git.command("push")
+@click.pass_context
+def cli_git_push(ctx: click.Context):
+    """Git push
+    """
+    (config, is_json, is_yes) = init_command(ctx)
+    try:
+        git.push(config.path, config.gitbranch)
+    except Exception as error:
+        handle_error(is_json, error)
+
+
+@cli_git.command("sync")
+@click.pass_context
+def cli_git_sync(ctx: click.Context):
+    """Git pull then Git push
+    """
+    (config, is_json, is_yes) = init_command(ctx)
+    try:
+        git.sync(config.path, config.gitbranch)
     except Exception as error:
         handle_error(is_json, error)

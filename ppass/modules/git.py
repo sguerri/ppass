@@ -18,6 +18,7 @@
 """Handle git actions
 """
 
+import os
 import subprocess
 
 
@@ -46,26 +47,51 @@ class git:
             mail (str): remote git repository email
             pull (bool, optional): If True, pull git repo instead of creating a new one. Defaults to False.
         """
-        subprocess.run(["git", "-C", path, "init"], capture_output=True)
-        subprocess.run(["git", "-C", path, "config", "user.name", user], capture_output=True)
-        subprocess.run(["git", "-C", path, "config", "user.email", mail], capture_output=True)
-        subprocess.run(["git", "-C", path, "remote", "add", "origin", repo], capture_output=True)
+        subprocess.run(["git", "-C", path, "init"], capture_output=False)
+        subprocess.run(["git", "-C", path, "config", "user.name", user], capture_output=False)
+        subprocess.run(["git", "-C", path, "config", "user.email", mail], capture_output=False)
+        subprocess.run(["git", "-C", path, "remote", "add", "origin", repo], capture_output=False)
         if pull:
-            git.pull(path)
+            git.pull(path, branch)
         else:
-            git.push(path, "Initial commit", branch)
+            subprocess.run(["git", "-C", path, "branch", "-M", branch], capture_output=False)
+            fpath = os.path.join(path, ".gitignore")
+            f = open(fpath, "w")
+            f.close()
+            git.commit(path, "Initial commit", branch)
 
     @staticmethod
-    def pull(path: str):
+    def pull(path: str, branch: str):
         """Pull remote repository
 
         Args:
             path (str): working directory
         """
-        subprocess.run(["git", "-C", path, "pull"])
+        subprocess.run(["git", "-C", path, "pull", "origin", branch])
 
     @staticmethod
-    def push(path: str, message: str, branch: str):
+    def push(path: str, branch: str):
+        """Push changes to remote
+
+        Args:
+            path (str): working directory
+            branch (str): push branch
+        """
+        subprocess.run(["git", "-C", path, "push", "-u", "origin", branch])
+
+    @staticmethod
+    def sync(path: str, branch: str):
+        """Pull then Push changes to remote
+
+        Args:
+            path (str): working directory
+            branch (str): push branch
+        """
+        git.pull(path, branch)
+        git.push(path, branch)
+
+    @staticmethod
+    def commit(path: str, message: str, branch: str):
         """Commit and push changes to remote
 
         Args:
@@ -73,6 +99,6 @@ class git:
             message (str): commit message
             branch (str): commit branch
         """
-        subprocess.run(["git", "-C", path, "add", "."], capture_output=True)
-        subprocess.run(["git", "-C", path, "commit", "-m", message], capture_output=True)
-        subprocess.run(["git", "-C", path, "push", "origin", branch])
+        subprocess.run(["git", "-C", path, "add", "."], capture_output=False)
+        subprocess.run(["git", "-C", path, "commit", "-m", message], capture_output=False)
+        git.push(path, branch)

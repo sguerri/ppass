@@ -65,7 +65,9 @@ class passwords:
                 continue
             if filter == "" or filter.lower() in root_name.lower():
                 # Check directory name vs filter
-                is_root_ok = True
+                # is_root_ok = True
+                # TODO set this flag to True with enhanced filters
+                pass
 
             for f in files:
                 # Loop all files
