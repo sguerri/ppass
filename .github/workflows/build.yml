@@ -45,6 +45,14 @@ jobs:
       PPA_EMAIL: 13090870+sguerri@users.noreply.github.com
 
     steps:
+      - name: Setup container
+        run: |
+          apt-get update && \
+          apt-get upgrade -y && \
+          apt-get install -y sudo ca-certificates unzip gnupg curl git && \
+          DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && \
+          apt-get install -y build-essential
+
       - name: Checkout current version
         uses: actions/checkout@v2
 
@@ -57,7 +65,7 @@ jobs:
         run: |
           sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv &&
           sudo apt update &&
-          sudo apt install -y debhelper dh-virtualenv
+          sudo apt install -y debhelper devscripts equivs dh-virtualenv
 
       - name: Install python dependencies
         run: |
