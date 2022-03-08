@@ -133,11 +133,12 @@ jobs:
       - name: Move all files
         run: |
           mkdir dist && \
-          cp "artifacts/**/*" dist
+          cp "**/*" dist
+        working-directory: artifacts
 
       - name: Display structure of dist
         run: ls -R
-        working-directory: dist
+        working-directory: artifacts/dist
 
 
 #      - name: Release
