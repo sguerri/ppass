@@ -17,7 +17,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.7,<4.0"
+python = ">=3.6.2,<4.0"
 click = "^8.0.4"
 rich = "^11.2.0"
 pyclip = "^0.5.4"
