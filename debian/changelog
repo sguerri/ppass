@@ -1,3 +1,12 @@
+ppass (1.0.0) unstable; urgency=low
+
+  * c401972 Update readme
+  * 8c3d829 Add --branch option to init-git
+  * e3a5a51 Add show_password style
+  * 954a489 Replace click.launch by webbrowser.open_new_tab
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Wed, 09 Mar 2022 10:26:15 +0100
+
 ppass (0.2.7) unstable; urgency=low
 
   * db9c856 Fix small bugs
