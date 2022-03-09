@@ -260,8 +260,9 @@ def cli_init(ctx, new_section: bool, path: str, identity: str, edit: bool):
 @click.option("--repo", default="", help="Git repository")
 @click.option("--user", default="", help="Git username")
 @click.option("--mail", default="", help="Git email")
+@click.option("--branch", default="", help="Git branch")
 @click.option("--pull", is_flag=True, help="Pull existing git repository")
-def cli_init_git(ctx, repo: str, user: str, mail: str, pull: bool):
+def cli_init_git(ctx, repo: str, user: str, mail: str, branch: str, pull: bool):
     """Initialize git
     """
     (context, is_json, is_yes) = recup_context(ctx)
@@ -271,6 +272,8 @@ def cli_init_git(ctx, repo: str, user: str, mail: str, pull: bool):
         config.gitrepo = params.validate(is_json, repo, "Git repository")
         config.gituser = params.validate(is_json, user, "Git username")
         config.gitmail = params.validate(is_json, mail, "Git email")
+        if branch.strip() != "":
+            config.gitbranch = branch.strip()
         config.save(context)
         git.init(config.path, config.gitrepo, config.gitbranch, config.gituser, config.gitmail, pull)
         handle_success(is_json, "Git initialized")
