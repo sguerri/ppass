@@ -227,9 +227,8 @@ class ui:
         Args:
             password (Password): password to display
         """
-        # TODO Style
-        print(password.app)
-        print(password.password)
-        print(password.username)
-        print(password.url)
+        print(f"[yellow bold]‣  {password.app}[/]")
+        print(f"[green bold]‣  {password.password}[/]")
+        print(f"[dark_cyan]└─ USERNAME :: {password.username}[/]")
+        print(f"[dark_cyan]└─ URL      :: {password.url}[/]")
         print(password.comment)

@@ -1,7 +1,7 @@
 # Welcome to ppass
 
 [![](https://badgen.net/github/release/sguerri/ppass)](https://github.com/sguerri/ppass/releases/)
-[![](https://img.shields.io/github/workflow/status/sguerri/ppass/Build/v0.2.7)](https://github.com/sguerri/ppass/actions/workflows/build.yml)
+[![](https://img.shields.io/github/workflow/status/sguerri/ppass/Build/v1.0.0)](https://github.com/sguerri/ppass/actions/workflows/build.yml)
 [![](https://badgen.net/github/license/sguerri/ppass)](https://www.gnu.org/licenses/)
 [![](https://badgen.net/pypi/v/ppass)](https://pypi.org/project/ppass/)
 [![](https://badgen.net/pypi/python/ppass)](#)
@@ -100,7 +100,7 @@ Note that `dh-virtualenv` built packages are dependent of python version. Use th
 Download latest `.deb` file from the [release page](https://github.com/sguerri/ppass/releases).
 
 ```bash
-sudo dpkg -i ppass_0.2.7_{{os}}_amd64.deb
+sudo dpkg -i ppass_1.0.0_{{os}}_amd64.deb
 ```
 
 ## Usage
