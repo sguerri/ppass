@@ -20,6 +20,7 @@
 
 import os
 import json
+import webbrowser
 
 import click
 import pyclip
@@ -352,7 +353,7 @@ def cli_open(ctx, filter: str):
             pyclip.copy(password.url)
             rjson.success(data=password.url)
         else:
-            click.launch(password.url)
+            webbrowser.open_new_tab(password.url)
     except Exception as error:
         handle_error(is_json, error)
 
