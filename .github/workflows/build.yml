@@ -59,7 +59,7 @@ jobs:
         run: |
           sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv && \
           sudo apt update && \
-          sudo apt install -y debhelper devscripts equivs dh-virtualenv
+          sudo apt install -y debhelper devscripts equivs dh-virtualenv bash-completion
 
       - name: Install dependencies (others)
         if: matrix.config.name != 'focal'
