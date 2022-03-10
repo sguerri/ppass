@@ -8,5 +8,5 @@ override_dh_virtualenv:
 		--pip-tool dh-poetry
 
 %:
-	dh $@ --with python-virtualenv
+	dh $@ --with python-virtualenv --with bash-completion
 	
