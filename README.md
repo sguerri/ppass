@@ -27,10 +27,10 @@ Stores created with **ppass** are compatible with **[pass](https://www.passwords
 * automatic fill in username and password to web browser
 * cli user interface or json response
 * cli commands shortcuts for fast access to passwords
+* commands and params autocompletion
 
 **Roadmap**
 * enhanced filter
-* autocompletion
 * enhanced clip functionnality
 * test on other platforms
 * code cleaning
