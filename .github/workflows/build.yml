@@ -64,7 +64,7 @@ jobs:
       - name: Install dependencies (others)
         if: matrix.config.name != 'focal'
         run: |
-          sudo apt install -y debhelper devscripts equivs dh-virtualenv
+          sudo apt install -y debhelper devscripts equivs dh-virtualenv bash-completion
 
       - name: Install python dependencies
         run: |
