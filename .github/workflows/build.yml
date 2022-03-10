@@ -6,7 +6,7 @@ on:
 
 env:
   APP_NAME: ppass
-  APP_VERSION: "1.1.0"
+  APP_VERSION: "1.1.1"
   PPA_REPO: sguerri/ppa
   PPA_USER: Sébastien GUERRI
   PPA_EMAIL: 13090870+sguerri@users.noreply.github.com
@@ -59,7 +59,7 @@ jobs:
         run: |
           sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv && \
           sudo apt update && \
-          sudo apt install -y debhelper devscripts equivs dh-virtualenv
+          sudo apt install -y debhelper devscripts equivs dh-virtualenv bash-completion
 
       - name: Install dependencies (others)
         if: matrix.config.name != 'focal'
