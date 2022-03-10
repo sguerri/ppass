@@ -116,6 +116,20 @@ class AppConfig:
             cfg.write(configfile)
             configfile.close()
 
+    @staticmethod
+    def get_sections(filepath: str) -> list[str]:
+        """Return the list of sections in config file
+
+        Args:
+            filepath (str): config file path
+
+        Returns:
+            list(str): List of section names
+        """
+        cfg = configparser.ConfigParser()
+        cfg.read(filepath)
+        return cfg.sections()
+
 
 class AliasedGroup(click.Group):
     """Class used by click groups to create aliases for each function
@@ -178,3 +192,7 @@ class app:
             str: application config file path
         """
         return os.path.join(Path.home(), "." + app.name() + "rc")
+
+    @staticmethod
+    def sections() -> list[str]:
+        return AppConfig.get_sections(app.default_rcpath())

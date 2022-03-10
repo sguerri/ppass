@@ -1,3 +1,11 @@
+ppass (1.1.0) unstable; urgency=low
+
+  * 5616e76 Add auto-completion in code
+  * 313f1c9 Add completion to debian files
+  * df8034d Update readme
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Thu, 10 Mar 2022 22:28:41 +0100
+
 ppass (1.0.0) unstable; urgency=low
 
   * c401972 Update readme

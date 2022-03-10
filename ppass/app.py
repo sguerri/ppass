@@ -209,12 +209,35 @@ def get_content(config: Config, password: str, user: str, url: str, comment: str
     return content
 
 
+# COMPLETION ##########################################################################################################
+
+def complete_store(ctx, param, incomplete):
+    items = app.sections()
+    return list(filter(lambda i: incomplete.lower() in i.lower(), items))
+
+
+def complete_filter(ctx, param, incomplete):
+    store = ctx.parent.params["context"]
+    config: Config = init_context(False, store)
+    items = passwords.get_list(config.path, incomplete)
+    return list(map(lambda i: f"\"{i.f_name}\"", items))
+
+
+def complete_folder(ctx, param, incomplete):
+    store = ctx.parent.parent.params["context"]
+    config: Config = init_context(False, store)
+    items = folders.get_list(config.path)
+    items = list(filter(lambda i: incomplete.lower() in i.name.lower(), items))
+    return list(map(lambda i: f"\"{i.name}\"", items))
+
+
 # CLI #################################################################################################################
 
 @click.group(cls=AliasedGroup)
 @click.pass_context
 @click.version_option(app.version())
-@click.option("-c", "--context", default="DEFAULT", help="Section of config file to load (default is DEFAULT)")
+@click.option("-c", "--context", default="DEFAULT", help="Section of config file to load (default is DEFAULT)",
+              shell_complete=complete_store)
 @click.option("-y", "--yes", is_flag=True, help="Auto confirm all prompts")
 @click.option("--json", is_flag=True, help="Return json values instead of ui")
 def cli(ctx, context, yes, json):
@@ -286,7 +309,7 @@ def cli_init_git(ctx, repo: str, user: str, mail: str, branch: str, pull: bool):
 
 @cli.command("list")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 def cli_list(ctx, filter: str):
     """List passwords
     """
@@ -300,7 +323,7 @@ def cli_list(ctx, filter: str):
 
 @cli.command("show")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 def cli_show(ctx, filter: str):
     """Show password details
     """
@@ -316,7 +339,7 @@ def cli_show(ctx, filter: str):
 
 @cli.command("delete")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 def cli_delete(ctx, filter: str):
     """Delete password
     """
@@ -339,7 +362,7 @@ def cli_delete(ctx, filter: str):
 
 @cli.command("open")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 def cli_open(ctx, filter: str):
     """Open password url
     """
@@ -360,7 +383,7 @@ def cli_open(ctx, filter: str):
 
 @cli.command("user")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 def cli_user(ctx, filter: str):
     """Copy password username
     """
@@ -382,7 +405,7 @@ def cli_user(ctx, filter: str):
 
 @cli.command("pass")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 def cli_pass(ctx, filter: str):
     """Copy password password
     """
@@ -403,7 +426,7 @@ def cli_pass(ctx, filter: str):
 
 @cli.command("clip")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 def cli_clip(ctx, filter: str):
     """Clip password to opened web url
     """
@@ -421,7 +444,7 @@ def cli_clip(ctx, filter: str):
 
 @cli.command("generate")
 @click.pass_context
-@click.option("--folder", default="", help="Folder name")
+@click.option("--folder", default="", help="Folder name", shell_complete=complete_folder)
 @click.option("--name", default="", help="Password name")
 @click.option("--user", default="", help="User name")
 @click.option("--url", default="", help="Site url")
@@ -448,7 +471,7 @@ def cli_generate(ctx, folder: str, name: str, user: str, url: str):
 
 @cli.command("insert")
 @click.pass_context
-@click.option("--folder", default="", help="Folder name")
+@click.option("--folder", default="", help="Folder name", shell_complete=complete_folder)
 @click.option("--name", default="", help="Password name")
 @click.option("--password", default="", help="Password")
 @click.option("--user", default="", help="User name")
@@ -476,7 +499,7 @@ def cli_insert(ctx, folder: str, name: str, password: str, user: str, url: str):
 
 @cli.command("edit")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 def cli_edit(ctx: click.Context, filter: str):
     """Edit password file
     """
@@ -508,7 +531,7 @@ def cli_modify(ctx: click.Context):
 
 @cli_modify.command("user")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 @click.option("--new", default="", help="New username")
 def cli_modify_user(ctx: click.Context, filter: str, new: str):
     """Modify username
@@ -531,7 +554,7 @@ def cli_modify_user(ctx: click.Context, filter: str, new: str):
 
 @cli_modify.command("url")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 @click.option("--new", default="", help="New url")
 def cli_modify_url(ctx: click.Context, filter: str, new: str):
     """Modify url
@@ -554,7 +577,7 @@ def cli_modify_url(ctx: click.Context, filter: str, new: str):
 
 @cli_modify.command("comment")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 @click.option("--new", default="", help="New comment")
 def cli_modify_comment(ctx: click.Context, filter: str, new: str):
     """Modify comment
@@ -585,7 +608,7 @@ def cli_modify_password(ctx: click.Context):
 
 @cli_modify_password.command("generate")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 def cli_modify_password_generate(ctx: click.Context, filter: str):
     """Modify password (generate a new random one)
     """
@@ -607,7 +630,7 @@ def cli_modify_password_generate(ctx: click.Context, filter: str):
 
 @cli_modify_password.command("insert")
 @click.pass_context
-@click.argument("filter", default="")
+@click.argument("filter", default="", shell_complete=complete_filter)
 @click.option("--new", default="", help="New password")
 def cli_modify_password_insert(ctx: click.Context, filter: str, new: str):
     """Modify password (password is already known)
@@ -672,7 +695,7 @@ def cli_folders_create(ctx: click.Context, name: str):
 
 @cli_folders.command("delete")
 @click.pass_context
-@click.option("--name", default="", help="Name of folder to delete")
+@click.option("--name", default="", help="Name of folder to delete", shell_complete=complete_folder)
 def cli_folders_delete(ctx: click.Context, name: str):
     """Delete an existing folder
     """
