@@ -269,11 +269,18 @@ def cli_init(ctx, new_section: bool, path: str, identity: str, edit: bool):
             config = load_config(is_json, context, new_section)
             if path == app.default_path() and new_section:
                 path = path[:len(path)-1] + "-" + context.lower()
-            if not os.path.exists(path):
-                os.makedirs(path)
-            config.path = params.validate_path(is_json, path, "Path")
+            # if not os.path.exists(path):
+            #     os.makedirs(path)
             config.identity = params.validate_identity(is_json, identity)
+            config.path = params.validate_path(is_json, path, "Path")
             config.save(context)
+            # Write default files
+            f = open(os.path.join(config.path, ".gitattributes"), "w")
+            f.write("*.gpg diff=gpg")
+            f.close()
+            f = open(os.path.join(config.path, ".gpg-id"), "w")
+            f.write(config.identity)
+            f.close()
             handle_success(is_json, "Application initialized")
     except Exception as error:
         handle_error(is_json, error)
