@@ -21,13 +21,14 @@ Stores created with **ppass** are compatible with **[pass](https://www.passwords
 **Main features**
 * gpg password creation (one file per password)
 * enhanced password file with username, url and comments
-* git integration
-* possibility to handle several distinct stores
 * open web browser from password file
 * automatic fill in username and password to web browser
-* cli user interface or json response
+* automatic ssh connexion with username and password
 * cli commands shortcuts for fast access to passwords
+* git integration
+* possibility to handle several distinct stores
 * commands and params autocompletion
+* cli user interface or json response
 
 **Roadmap**
 * enhanced filter
@@ -56,6 +57,7 @@ Stores created with **ppass** are compatible with **[pass](https://www.passwords
     + [Publish to git](#publish-to-git)
     + [Change output to JSON](#change-output-to-json)
     + [Shortcuts and Aliases](#shortcuts-and-aliases)
+  * [SSH Connexion](#ssh-connexion)
   * [Build](#build)
   * [Dependencies](#dependencies)
   * [Author](#author)
@@ -263,6 +265,17 @@ alias ppp='ppass -c PERSO'
 alias pppc='ppass -c PERSO clip'
 alias pppo='ppass -c PERSO open'
 ```
+
+## SSH Connexion
+
+In case you are using login / password to connect to a server through SSH, it can be done via **ppass**. Please note that we discourage such type of connexion. Prefer a connexion with [SSH keys](https://www.ssh.com/academy/ssh/key) instead.
+
+In **ppass**, set `"ssh+${DOMAIN}"` in the url field.
+
+The `open` and `clip` commands will open a new terminal and fill in SSH connexion.
+
+Please note this is using `gnome-terminal` as an additional application dependency.
+
 
 ## Build
 
