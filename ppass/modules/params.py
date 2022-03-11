@@ -80,7 +80,9 @@ class params:
             str: validated value
         """
         new_value = params.validate(is_json, value, message)
-        assert (os.path.exists(new_value)), "Invalid path"
+        # assert (os.path.exists(new_value)), "Invalid path"
+        if not os.path.exists(new_value):
+            os.makedirs(new_value)
         return new_value
 
     @staticmethod
