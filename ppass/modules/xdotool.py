@@ -40,10 +40,24 @@ class xdotool:
         xdotool.send_return()
 
     @staticmethod
-    def wait():
+    def ssh_open(user: str, domain: str, password: str):
+        """Minimize current window and connect to SSH
+
+        Args:
+            user (str): SSH user
+            domain (str): SSH site
+            password (str): SSH password
+        """
+        xdotool.minimize_window()
+        subprocess.call(["gnome-terminal", "--maximize", "--window", "--", "bash", "-c", f"ssh {user}@{domain}"])
+        xdotool.wait("1")
+        xdotool.send_message(f"{password}\n")
+
+    @staticmethod
+    def wait(duration: str = "0.2"):
         """Wait between two xdotool actions
         """
-        subprocess.call(["sleep", "0.2"])
+        subprocess.call(["sleep", duration])
 
     @staticmethod
     def minimize_window():

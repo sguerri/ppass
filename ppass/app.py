@@ -372,6 +372,7 @@ def cli_delete(ctx, filter: str):
 @click.argument("filter", default="", shell_complete=complete_filter)
 def cli_open(ctx, filter: str):
     """Open password url
+    For SSH : Open and connect
     """
     (config, is_json, is_yes) = init_command(ctx)
     try:
@@ -382,6 +383,9 @@ def cli_open(ctx, filter: str):
         if is_json:
             pyclip.copy(password.url)
             rjson.success(data=password.url)
+        elif password.url.startswith("ssh+"):
+            domain = password.url.removeprefix("ssh+")
+            xdotool.ssh_open(password.username, domain, password.password)
         else:
             webbrowser.open_new_tab(password.url)
     except Exception as error:
@@ -436,6 +440,7 @@ def cli_pass(ctx, filter: str):
 @click.argument("filter", default="", shell_complete=complete_filter)
 def cli_clip(ctx, filter: str):
     """Clip password to opened web url
+    For SSH : Open and connect
     """
     (config, is_json, is_yes) = init_command(ctx)
     try:
@@ -444,7 +449,11 @@ def cli_clip(ctx, filter: str):
         password = params.validate_password(is_json, items)
         password = gpg.decrypt_to_password(password["path"], config.sep_username, config.sep_url)
         assert (password.username != ""), "Missing username"
-        xdotool.clip(password.username, password.password)
+        if password.url.startswith("ssh+"):
+            domain = password.url.removeprefix("ssh+")
+            xdotool.ssh_open(password.username, domain, password.password)
+        else:
+            xdotool.clip(password.username, password.password)
     except Exception as error:
         handle_error(is_json, error)
 
