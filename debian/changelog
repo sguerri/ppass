@@ -1,3 +1,10 @@
+ppass (1.2.0) unstable; urgency=low
+
+  * be1707a Add SSH connection
+  * e871517 Update documentation
+
+ -- Sebastien GUERRI <nierrgu@bmel.fr>  Fri, 11 Mar 2022 20:26:37 +0100
+
 ppass (1.1.5) unstable; urgency=low
 
   * cc8df3c Fix issue on git pull
