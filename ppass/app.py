@@ -361,7 +361,7 @@ def cli_delete(ctx, filter: str):
         # DELETE
         os.remove(password.path)
         if config.usegit:
-            git.push(config.path, f"Password file <{password.f_name}> has been deleted", config.gitbranch)
+            git.commit(config.path, f"Password file <{password.f_name}> has been deleted", config.gitbranch)
         handle_success(is_json, f"Password file <{password.f_name}> has been deleted")
     except Exception as error:
         handle_error(is_json, error)
@@ -470,7 +470,7 @@ def cli_generate(ctx, folder: str, name: str, user: str, url: str):
         filepath = os.path.join(config.path, folder, name + ".gpg")
         gpg.encrypt_to_file(content, config.identity, filepath)
         if config.usegit:
-            git.push(config.path, "Password file created", config.gitbranch)
+            git.commit(config.path, "Password file created", config.gitbranch)
         handle_success(is_json, "Password file created")
     except Exception as error:
         handle_error(is_json, error)
@@ -498,7 +498,7 @@ def cli_insert(ctx, folder: str, name: str, password: str, user: str, url: str):
         filepath = os.path.join(config.path, folder, name + ".gpg")
         gpg.encrypt_to_file(content, config.identity, filepath)
         if config.usegit:
-            git.push(config.path, "Password file created", config.gitbranch)
+            git.commit(config.path, "Password file created", config.gitbranch)
         handle_success(is_json, "Password file created")
     except Exception as error:
         handle_error(is_json, error)
@@ -520,7 +520,7 @@ def cli_edit(ctx: click.Context, filter: str):
         os.remove(password_item["path"])
         gpg.encrypt_to_file(new_content, config.identity, password_item["path"])
         if config.usegit:
-            git.push(config.path, "File modified", config.gitbranch)
+            git.commit(config.path, "File modified", config.gitbranch)
         handle_success(is_json, "File modified")
     except Exception as error:
         handle_error(is_json, error)
@@ -553,7 +553,7 @@ def cli_modify_user(ctx: click.Context, filter: str, new: str):
         os.remove(password_item["path"])
         gpg.encrypt_to_file(content, config.identity, password_item["path"])
         if config.usegit:
-            git.push(config.path, "Username modified", config.gitbranch)
+            git.commit(config.path, "Username modified", config.gitbranch)
         handle_success(is_json, "Username modified")
     except Exception as error:
         handle_error(is_json, error)
@@ -576,7 +576,7 @@ def cli_modify_url(ctx: click.Context, filter: str, new: str):
         os.remove(password_item["path"])
         gpg.encrypt_to_file(content, config.identity, password_item["path"])
         if config.usegit:
-            git.push(config.path, "Url modified", config.gitbranch)
+            git.commit(config.path, "Url modified", config.gitbranch)
         handle_success(is_json, "Url modified")
     except Exception as error:
         handle_error(is_json, error)
@@ -599,7 +599,7 @@ def cli_modify_comment(ctx: click.Context, filter: str, new: str):
         os.remove(password_item["path"])
         gpg.encrypt_to_file(content, config.identity, password_item["path"])
         if config.usegit:
-            git.push(config.path, "Comment modified", config.gitbranch)
+            git.commit(config.path, "Comment modified", config.gitbranch)
         handle_success(is_json, "Comment modified")
     except Exception as error:
         handle_error(is_json, error)
@@ -629,7 +629,7 @@ def cli_modify_password_generate(ctx: click.Context, filter: str):
         os.remove(password_item["path"])
         gpg.encrypt_to_file(content, config.identity, password_item["path"])
         if config.usegit:
-            git.push(config.path, "New password generated", config.gitbranch)
+            git.commit(config.path, "New password generated", config.gitbranch)
         handle_success(is_json, "New password generated")
     except Exception as error:
         handle_error(is_json, error)
@@ -652,7 +652,7 @@ def cli_modify_password_insert(ctx: click.Context, filter: str, new: str):
         os.remove(password_item["path"])
         gpg.encrypt_to_file(content, config.identity, password_item["path"])
         if config.usegit:
-            git.push(config.path, "New password saved", config.gitbranch)
+            git.commit(config.path, "New password saved", config.gitbranch)
         handle_success(is_json, "New password saved")
     except Exception as error:
         handle_error(is_json, error)
@@ -694,7 +694,7 @@ def cli_folders_create(ctx: click.Context, name: str):
         path = os.path.join(config.path, name)
         folders.create(name, path)
         if config.usegit:
-            git.push(config.path, f"Folder <{name}> has been created", config.gitbranch)
+            git.commit(config.path, f"Folder <{name}> has been created", config.gitbranch)
         handle_success(is_json, f"Folder <{name}> has been created")
     except Exception as error:
         handle_error(is_json, error)
@@ -719,7 +719,7 @@ def cli_folders_delete(ctx: click.Context, name: str):
         path = os.path.join(config.path, name)
         folders.delete(name, path)
         if config.usegit:
-            git.push(config.path, f"Folder <{name}> has been deleted", config.gitbranch)
+            git.commit(config.path, f"Folder <{name}> has been deleted", config.gitbranch)
         handle_success(is_json, f"Folder <{name}> has been deleted")
     except Exception as error:
         handle_error(is_json, error)
