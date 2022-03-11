@@ -68,6 +68,7 @@ class git:
             path (str): working directory
         """
         subprocess.run(["git", "-C", path, "pull", "origin", branch])
+        subprocess.run(["git", "-C", path, "checkout", branch])
 
     @staticmethod
     def push(path: str, branch: str):
