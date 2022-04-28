@@ -39,6 +39,10 @@ jobs:
             os: ubuntu-20.04
             container: ubuntu:21.10
             triplet: x64-linux
+          - name: jammy
+            os: ubuntu-20.04
+            container: ubuntu:22.04
+            triplet: x64-linux
 
     steps:
       - name: Setup container
