@@ -1,7 +1,7 @@
 # Welcome to ppass
 
 [![](https://badgen.net/github/release/sguerri/ppass)](https://github.com/sguerri/ppass/releases/)
-[![](https://img.shields.io/github/workflow/status/sguerri/ppass/Build/v1.2.0)](https://github.com/sguerri/ppass/actions/workflows/build.yml)
+[![](https://img.shields.io/github/workflow/status/sguerri/ppass/Build/v1.2.1)](https://github.com/sguerri/ppass/actions/workflows/build.yml)
 [![](https://badgen.net/github/license/sguerri/ppass)](https://www.gnu.org/licenses/)
 [![](https://badgen.net/pypi/v/ppass)](https://pypi.org/project/ppass/)
 [![](https://badgen.net/pypi/python/ppass)](#)
@@ -68,7 +68,7 @@ Stores created with **ppass** are compatible with **[pass](https://www.passwords
 
 ### Requirements
 
-The application is developped and used on ubuntu 21.10, with python 3.9.7. Any feedback on other platforms is welcomed.
+The application is developped and used on ubuntu 22.04, with python 3.10.4. Any feedback on other platforms is welcomed.
 
 - python3 >=3.6.2,<4.0
 - xdotool: `sudo apt install xdotool`
@@ -98,11 +98,12 @@ Note that `dh-virtualenv` built packages are dependent of python version. Use th
 * ubuntu focal 20.04: Python 3.8
 * ubuntu hirsute 21.04: Python 3.9
 * ubuntu impish 21.10: Python 3.9
+* ubuntu jammy 22.04: Python 3.10
 
 Download latest `.deb` file from the [release page](https://github.com/sguerri/ppass/releases).
 
 ```bash
-sudo dpkg -i ppass_1.2.0_{{os}}_amd64.deb
+sudo dpkg -i ppass_1.2.1_{{os}}_amd64.deb
 ```
 
 ## Usage
@@ -149,7 +150,7 @@ If you already know the password:
 ppass insert
 ```
 
-If the is only one folder, it will be selected by default. Otherwise the list of available folders will be prompted for selection.
+If there is only one folder, it will be selected by default. Otherwise the list of available folders will be prompted for selection.
 
 ### Clip username and password
 
@@ -210,14 +211,14 @@ ppass -c "${STORE}" init-git
 You can also pass parameter through cli command:
 
 ```bash
-ppass -c "${STORE}" init-git --repo "${REPO}" --user "${USER}" --mail "${EMAIL}"
+ppass -c "${STORE}" init-git --repo "${REPO}" --user "${USER}" --mail "${EMAIL}" --branch "${BRANCH}"
 ```
 
 ### Initialise from existing git repository
 
 If the git repository already exists, you can restore it in the current store folder by adding the `--pull` option to `init-git` command.
 
-It will download the latest commit from `main` branch. If the branch name is different, you can update it in the config file through `ppass init --edit`.
+It will download the latest commit from `main` branch. If the branch name is different, you can update it in the config file through `ppass init --edit` or through `--branch` option.
 
 ### Publish to git
 

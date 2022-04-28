@@ -6,7 +6,7 @@ on:
 
 env:
   APP_NAME: ppass
-  APP_VERSION: "1.2.0"
+  APP_VERSION: "1.2.1"
   PPA_REPO: sguerri/ppa
   PPA_USER: Sébastien GUERRI
   PPA_EMAIL: 13090870+sguerri@users.noreply.github.com
@@ -38,6 +38,10 @@ jobs:
           - name: impish
             os: ubuntu-20.04
             container: ubuntu:21.10
+            triplet: x64-linux
+          - name: jammy
+            os: ubuntu-20.04
+            container: ubuntu:22.04
             triplet: x64-linux
 
     steps:
