@@ -68,6 +68,23 @@ class params:
         return new_value
 
     @staticmethod
+    def validate_url(is_json: bool, value: str, message: str) -> str:
+        """URL parameter validation
+
+        Args:
+            is_json (bool): is cli in JSON mode
+            value (str): parameter value
+            message (str): cli message for input
+
+        Returns:
+            str: validated value
+        """
+        new_value = value.strip()
+        if new_value == "" and not is_json:
+            new_value = Prompt.ask(message, default="")
+        return new_value
+
+    @staticmethod
     def validate_path(is_json: bool, value: str, message: str) -> str:
         """Path parameter validation
 
