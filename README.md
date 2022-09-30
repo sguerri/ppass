@@ -1,7 +1,7 @@
 # Welcome to ppass
 
 [![](https://badgen.net/github/release/sguerri/ppass)](https://github.com/sguerri/ppass/releases/)
-[![](https://img.shields.io/github/workflow/status/sguerri/ppass/Build/v1.2.3)](https://github.com/sguerri/ppass/actions/workflows/build.yml)
+[![](https://img.shields.io/github/workflow/status/sguerri/ppass/Build/v1.3.0)](https://github.com/sguerri/ppass/actions/workflows/build.yml)
 [![](https://badgen.net/github/license/sguerri/ppass)](https://www.gnu.org/licenses/)
 [![](https://badgen.net/pypi/v/ppass)](https://pypi.org/project/ppass/)
 [![](https://badgen.net/pypi/python/ppass)](#)
@@ -56,6 +56,7 @@ Stores created with **ppass** are compatible with **[pass](https://www.passwords
     + [Initialise from existing git repository](#initialise-from-existing-git-repository)
     + [Publish to git](#publish-to-git)
     + [Change output to JSON](#change-output-to-json)
+    + [Create a one time password](#create-a-one-time-password)
     + [Shortcuts and Aliases](#shortcuts-and-aliases)
   * [SSH Connexion](#ssh-connexion)
   * [Build](#build)
@@ -103,7 +104,7 @@ Note that `dh-virtualenv` built packages are dependent of python version. Use th
 Download latest `.deb` file from the [release page](https://github.com/sguerri/ppass/releases).
 
 ```bash
-sudo dpkg -i ppass_1.2.3_{{os}}_amd64.deb
+sudo dpkg -i ppass_1.3.0_{{os}}_amd64.deb
 ```
 
 ## Usage
@@ -245,6 +246,22 @@ It is however possible to pass all required parameters through command options, 
 ```bash
 ppass --json <command> ...
 ```
+
+### Create a one time password
+
+It is possible to generate a password for direct usage, without saving it to any password file.
+
+```bash
+ppass otp
+```
+
+**ppass** does not need to be initialized.
+
+By default, the password will be saved to clipboard.
+
+It is possible to output json file: `ppass --json otp`
+
+It is also possible to output raw text password: `ppass otp --text`
 
 ### Shortcuts and Aliases
 

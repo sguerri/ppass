@@ -312,6 +312,26 @@ def cli_init_git(ctx, repo: str, user: str, mail: str, branch: str, pull: bool):
         handle_error(is_json, error)
 
 
+# GLOBAL ##############################################################################################################
+
+@cli.command("otp")
+@click.pass_context
+@click.option("--text", is_flag=True, help="Return text value instead of clip")
+def cli_otp(ctx, text):
+    """ Create a one time password, not saved to file
+    """
+    (context, is_json, is_yes) = recup_context(ctx)
+    password = utils.generate_password()
+    if is_json:
+        pyclip.copy(password)
+        rjson.success(data=password)
+    elif text:
+        print(password)
+    else:
+        pyclip.copy(password)
+        ui.print_info("New password copied to clipboard")
+
+
 # PASSWORDS ###########################################################################################################
 
 @cli.command("list")
