@@ -56,6 +56,7 @@ Stores created with **ppass** are compatible with **[pass](https://www.passwords
     + [Initialise from existing git repository](#initialise-from-existing-git-repository)
     + [Publish to git](#publish-to-git)
     + [Change output to JSON](#change-output-to-json)
+    + [Create a one time password](#create-a-one-time-password)
     + [Shortcuts and Aliases](#shortcuts-and-aliases)
   * [SSH Connexion](#ssh-connexion)
   * [Build](#build)
@@ -245,6 +246,22 @@ It is however possible to pass all required parameters through command options, 
 ```bash
 ppass --json <command> ...
 ```
+
+### Create a one time password
+
+It is possible to generate a password for direct usage, without saving it to any password file.
+
+```bash
+ppass otp
+```
+
+**ppass** does not need to be initialized.
+
+By default, the password will be saved to clipboard.
+
+It is possible to output json file: `ppass --json otp`
+
+It is also possible to output raw text password: `ppass otp --text`
 
 ### Shortcuts and Aliases
 
