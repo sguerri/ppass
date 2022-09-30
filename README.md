@@ -1,7 +1,7 @@
 # Welcome to ppass
 
 [![](https://badgen.net/github/release/sguerri/ppass)](https://github.com/sguerri/ppass/releases/)
-[![](https://img.shields.io/github/workflow/status/sguerri/ppass/Build/v1.3.1)](https://github.com/sguerri/ppass/actions/workflows/build.yml)
+[![](https://img.shields.io/github/workflow/status/sguerri/ppass/Build/v1.3.2)](https://github.com/sguerri/ppass/actions/workflows/build.yml)
 [![](https://badgen.net/github/license/sguerri/ppass)](https://www.gnu.org/licenses/)
 [![](https://badgen.net/pypi/v/ppass)](https://pypi.org/project/ppass/)
 [![](https://badgen.net/pypi/python/ppass)](#)
@@ -97,14 +97,14 @@ A deb package is available, built using `dh-virtualenv`. Installing this package
 Note that `dh-virtualenv` built packages are dependent of python version. Use this only if you have default python version installed:
 * ubuntu bionic 18.04: Python 3.6
 * ubuntu focal 20.04: Python 3.8
-* ubuntu hirsute 21.04: Python 3.9
-* ubuntu impish 21.10: Python 3.9
+* ubuntu hirsute 21.04: Python 3.9 : deprecated (new releases will not be available)
+* ubuntu impish 21.10: Python 3.9 : deprecated (new releases will not be available)
 * ubuntu jammy 22.04: Python 3.10
 
 Download latest `.deb` file from the [release page](https://github.com/sguerri/ppass/releases).
 
 ```bash
-sudo dpkg -i ppass_1.3.1_{{os}}_amd64.deb
+sudo dpkg -i ppass_1.3.2_{{os}}_amd64.deb
 ```
 
 ## Usage
