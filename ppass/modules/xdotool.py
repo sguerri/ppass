@@ -54,7 +54,7 @@ class xdotool:
         xdotool.send_message(f"{password}\n")
 
     @staticmethod
-    def wait(duration: str = "0.2"):
+    def wait(duration: str = "0.5"):
         """Wait between two xdotool actions
         """
         subprocess.call(["sleep", duration])
