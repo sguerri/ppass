@@ -6,7 +6,7 @@ on:
 
 env:
   APP_NAME: ppass
-  APP_VERSION: "1.3.0"
+  APP_VERSION: "1.3.1"
   PPA_REPO: sguerri/ppa
   PPA_USER: Sébastien GUERRI
   PPA_EMAIL: 13090870+sguerri@users.noreply.github.com
@@ -31,10 +31,10 @@ jobs:
             os: ubuntu-20.04
             container: ubuntu:20.04
             triplet: x64-linux
-          - name: hirsute
-            os: ubuntu-20.04
-            container: ubuntu:21.04
-            triplet: x64-linux
+#          - name: hirsute
+#            os: ubuntu-20.04
+#            container: ubuntu:21.04
+#            triplet: x64-linux
           - name: impish
             os: ubuntu-20.04
             container: ubuntu:21.10
