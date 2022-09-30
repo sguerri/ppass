@@ -97,8 +97,8 @@ A deb package is available, built using `dh-virtualenv`. Installing this package
 Note that `dh-virtualenv` built packages are dependent of python version. Use this only if you have default python version installed:
 * ubuntu bionic 18.04: Python 3.6
 * ubuntu focal 20.04: Python 3.8
-* ubuntu hirsute 21.04: Python 3.9
-* ubuntu impish 21.10: Python 3.9
+* ubuntu hirsute 21.04: Python 3.9 : deprecated (new releases will not be available)
+* ubuntu impish 21.10: Python 3.9 : deprecated (new releases will not be available)
 * ubuntu jammy 22.04: Python 3.10
 
 Download latest `.deb` file from the [release page](https://github.com/sguerri/ppass/releases).
